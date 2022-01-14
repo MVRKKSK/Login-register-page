@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 
 
+
 import { LockClosedIcon } from '@heroicons/react/solid'
 
 function Register() {
+
 
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   async function handleSubmit(e) {
+    
 
     e.preventDefault();
     const response = await fetch("http://localhost:2500/api/register", {
@@ -24,6 +27,13 @@ function Register() {
 
     const data = await response.json()
     console.log(data);
+    if(data.status === "error"){
+      alert("hello you are successfully logged in")
+      window.location.href = "/login";
+    }
+    else if(data.status === "ok"){
+      window.location.href = "/login";
+    }
 
   }
 
